@@ -16,6 +16,3 @@ data class Picture(
     @SerializedName("text")
     val text: String,
 )
-
-
-

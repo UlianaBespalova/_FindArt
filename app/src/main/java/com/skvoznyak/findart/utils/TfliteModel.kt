@@ -5,15 +5,14 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.util.Log
 import com.skvoznyak.findart.ml.ModelMeta
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 
 class TfliteModel {
 
-    fun imageToVector(bm_s: Bitmap, context: Context) : FloatArray {
+    fun imageToVector(bm_s: Bitmap, context: Context): FloatArray {
 
         var res = emptyArray<Float>().toFloatArray()
         val bm = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -22,14 +21,17 @@ class TfliteModel {
             return res
         }
 
-        try{
+        try {
             val model = ModelMeta.newInstance(context)
 
             val bm_8888: Bitmap = bm.copy(Bitmap.Config.ARGB_8888, true)
             val bm_sized_8888 = Bitmap.createScaledBitmap(bm_8888, 224, 224, true)
 
             val byteBuffer = convertBitmapToByteBuffer(bm_sized_8888)
-            val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
+            val inputFeature0 = TensorBuffer.createFixedSize(
+                intArrayOf(1, 224, 224, 3),
+                DataType.FLOAT32
+            )
             inputFeature0.loadBuffer(byteBuffer)
 
             val outputs = model.process(inputFeature0)
@@ -37,14 +39,12 @@ class TfliteModel {
 
             res = outputFeature0.floatArray
             model.close()
-
         } catch (e: Exception) {
             Log.d("ivan", "Error while loading magic")
             e.printStackTrace()
         }
         return res
     }
-
 
     private fun convertBitmapToByteBuffer(bm: Bitmap): ByteBuffer {
         val INPUT_SIZE = 224
@@ -64,21 +64,20 @@ class TfliteModel {
         for (i in 0 until INPUT_SIZE) {
             for (j in 0 until INPUT_SIZE) {
                 val value = intValues[pixel++]
-                imgData.putFloat(((( value.shr(16) and 0xFF)/IMAGE_MEAN)-IMAGE_STD).toFloat())
-                imgData.putFloat((((value.shr(8) and 0xFF)/IMAGE_MEAN)-IMAGE_STD).toFloat())
-                imgData.putFloat((((value and 0xFF)/127.5)-1).toFloat())
+                imgData.putFloat((((value.shr(16) and 0xFF) / IMAGE_MEAN) - IMAGE_STD).toFloat())
+                imgData.putFloat((((value.shr(8) and 0xFF) / IMAGE_MEAN) - IMAGE_STD).toFloat())
+                imgData.putFloat((((value and 0xFF) / 127.5) - 1).toFloat())
             }
         }
-        return imgData;
+        return imgData
     }
-
 
     fun PRINT_RESUTL(res: FloatArray) {
         for (step in (0..3)) {
             Log.d("ivan", "---------------$step--------------")
 
             val vector = mutableListOf<Float>()
-            for (i in (256*step..256*(step+1)-1)) {
+            for (i in (256 * step..256 * (step + 1) - 1)) {
                 vector.add(res[i])
             }
             val str = vector.joinToString(separator = "|")

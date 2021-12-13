@@ -8,13 +8,13 @@ import androidx.appcompat.app.AppCompatDelegate
 object SharedPref {
     private var mySharePref: SharedPreferences? = null
 
-    fun setContext (context: Context) {
+    fun setContext(context: Context) {
         mySharePref = context.getSharedPreferences("filename", Context.MODE_PRIVATE)
     }
 
     fun setNightModeState(state: Boolean) {
         if (mySharePref == null) return
-        val editor : SharedPreferences.Editor = mySharePref!!.edit()
+        val editor: SharedPreferences.Editor = mySharePref!!.edit()
         editor.putBoolean("NightMode", state)
         editor.commit()
         if (state) {
@@ -38,7 +38,7 @@ object SharedPref {
     }
 }
 
-fun isNightMode(uiMode : Int) : Boolean {
+fun isNightMode(uiMode: Int): Boolean {
     when (uiMode and Configuration.UI_MODE_NIGHT_MASK) {
         Configuration.UI_MODE_NIGHT_NO -> {
             return false

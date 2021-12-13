@@ -7,8 +7,8 @@ import retrofit2.http.POST
 
 interface KnnApi {
     @POST("get_similar")
-    fun knnGetSimilarPictures (
+    fun knnGetSimilarPictures(
         @Body jsonObject: JSONObject
     ):
-    Call<List<Picture>>
+        Call<List<Picture>>
 }

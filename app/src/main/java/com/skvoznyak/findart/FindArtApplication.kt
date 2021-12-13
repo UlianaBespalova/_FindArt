@@ -12,5 +12,4 @@ class FindArtApplication : Application() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
         RxPaperBook.init(this)
     }
-
 }

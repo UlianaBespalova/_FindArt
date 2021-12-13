@@ -2,16 +2,19 @@ package com.skvoznyak.findart
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.skvoznyak.findart.databinding.ActivityMainBinding
 import com.skvoznyak.findart.databinding.LayoutToolbarBinding
 
-
 open class BaseActivity : AppCompatActivity() {
 
-    private lateinit var mainBinding : ActivityMainBinding
+    private lateinit var mainBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +30,11 @@ open class BaseActivity : AppCompatActivity() {
     protected open fun addToolbar() {
         val toolbarBinding = LayoutToolbarBinding.inflate(layoutInflater)
         addContentView(
-            toolbarBinding.root, ViewGroup.LayoutParams(
+            toolbarBinding.root,
+            ViewGroup.LayoutParams(
                 ViewGroup
-                    .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                    .LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
             )
         )
         setSupportActionBar(toolbarBinding.toolbar)
@@ -44,7 +49,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             android.R.id.home -> {
                 this.finish()
                 true

@@ -2,10 +2,9 @@ package com.skvoznyak.findart.model
 
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import org.json.JSONObject
-
 
 object PictureRepository {
 
@@ -17,7 +16,7 @@ object PictureRepository {
         .build()
     private val knnApi = retrofit.create(KnnApi::class.java)
 
-    fun getSimilarPictures(vector : FloatArray): Single<List<Picture>> {
+    fun getSimilarPictures(vector: FloatArray): Single<List<Picture>> {
 
         val kNeighbors = 6
         val paramObject = JSONObject()

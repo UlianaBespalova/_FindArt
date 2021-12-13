@@ -3,7 +3,6 @@ package com.skvoznyak.findart
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 
 @SuppressLint("CustomSplashScreen")

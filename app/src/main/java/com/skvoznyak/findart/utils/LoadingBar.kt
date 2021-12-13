@@ -10,7 +10,6 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.Transformation
 
-
 class LoadingBar : View {
 
     private val dotRadius = 9
@@ -47,28 +46,32 @@ class LoadingBar : View {
                     (2 * dotRadius + i * dotsDistributionX),
                     bounceDotRadius.toFloat(),
                     bounceDotRadius.toFloat(),
-                    paint)
+                    paint
+                )
 
                 paint.color = Color.parseColor("#55FFECB8")
                 canvas.drawCircle(
                     (2 * dotRadius + i * dotsDistributionX),
                     bounceDotRadius.toFloat(),
-                    dotRadius.toFloat()+3,
-                    paint)
+                    dotRadius.toFloat() + 3,
+                    paint
+                )
 
                 paint.color = Color.parseColor("#FFFFECB8")
                 canvas.drawCircle(
                     (2 * dotRadius + i * dotsDistributionX),
                     bounceDotRadius.toFloat(),
                     dotRadius.toFloat(),
-                    paint)
+                    paint
+                )
             } else {
                 paint.color = Color.parseColor("#FF707070")
                 canvas.drawCircle(
                     (2 * dotRadius + i * dotsDistributionX),
                     bounceDotRadius.toFloat(),
                     dotRadius.toFloat(),
-                    paint)
+                    paint
+                )
             }
         }
     }
@@ -77,7 +80,7 @@ class LoadingBar : View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
         val width: Int
-        val calculatedWidth = dotsDistributionX * (dotAmount-1) + bounceDotRadius * 3
+        val calculatedWidth = dotsDistributionX * (dotAmount - 1) + bounceDotRadius * 3
         width = calculatedWidth.toInt()
         val height: Int = bounceDotRadius * 2
 
@@ -89,16 +92,18 @@ class LoadingBar : View {
         bounceAnimation.duration = duration
         bounceAnimation.repeatCount = Animation.INFINITE
         bounceAnimation.interpolator = LinearInterpolator()
-        bounceAnimation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation) {}
-            override fun onAnimationEnd(animation: Animation) {}
-            override fun onAnimationRepeat(animation: Animation) {
-                dotPosition++
-                if (dotPosition == dotAmount) {
-                    dotPosition = 0
+        bounceAnimation.setAnimationListener(
+            object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation) {}
+                override fun onAnimationEnd(animation: Animation) {}
+                override fun onAnimationRepeat(animation: Animation) {
+                    dotPosition++
+                    if (dotPosition == dotAmount) {
+                        dotPosition = 0
+                    }
                 }
             }
-        })
+        )
         startAnimation(bounceAnimation)
     }
 

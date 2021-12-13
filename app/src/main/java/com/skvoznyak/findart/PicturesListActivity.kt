@@ -14,12 +14,11 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
-
 open class PicturesListActivity : BaseActivity() {
 
     private lateinit var listScreenBinding: ListScreenBinding
-    protected var pictures : List<Picture>? = null
-    private var varMenu : Menu? = null
+    protected var pictures: List<Picture>? = null
+    private var varMenu: Menu? = null
     protected val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,27 +28,27 @@ open class PicturesListActivity : BaseActivity() {
         createResultList()
     }
 
-
     private fun makePictureList(picturesSingle: Single<List<Picture>>) {
         val picturesDisposable = picturesSingle
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ pics ->
-                if (pics.isNotEmpty()) {
-                    pictures = pics
-                    setResultList()
-
-                } else {
+            .subscribe(
+                { pics ->
+                    if (pics.isNotEmpty()) {
+                        pictures = pics
+                        setResultList()
+                    } else {
+                        noResults()
+                    }
+                },
+                { err ->
                     noResults()
                 }
-            }, { err ->
-                noResults()
-
-            })
+            )
         disposables.add(picturesDisposable)
     }
 
     private fun noResults() {
-        val resultList:RecyclerView = findViewById(R.id.resultList)
+        val resultList: RecyclerView = findViewById(R.id.resultList)
         val headerAdapter = HeaderAdapter(resources.getString(R.string.no_bookmarks))
         resultList.adapter = headerAdapter
         resultList.layoutManager = LinearLayoutManager(this)
@@ -57,7 +56,7 @@ open class PicturesListActivity : BaseActivity() {
 
     private fun setResultList() {
         if (pictures == null) return
-        val resultList:RecyclerView = findViewById(R.id.resultList)
+        val resultList: RecyclerView = findViewById(R.id.resultList)
         resultList.isNestedScrollingEnabled = true
 
         val pictureAdapter = PictureAdapter(this, pictures!!, null, ::openPicture)
@@ -66,16 +65,18 @@ open class PicturesListActivity : BaseActivity() {
         resultList.layoutManager = LinearLayoutManager(this)
     }
 
-    open fun createResultList(){
+    open fun createResultList() {
         StorageManager.getAll(::makePictureList)
     }
 
     private fun addContent() {
         listScreenBinding = ListScreenBinding.inflate(layoutInflater)
         addContentView(
-            listScreenBinding.root, ViewGroup.LayoutParams(
+            listScreenBinding.root,
+            ViewGroup.LayoutParams(
                 ViewGroup
-                    .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+                    .LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
             )
         )
     }
@@ -92,7 +93,7 @@ open class PicturesListActivity : BaseActivity() {
     }
 
     fun openPicture(title: String) {
-        val picture = pictures?.firstOrNull{ it.title == title } ?: return
+        val picture = pictures?.firstOrNull { it.title == title } ?: return
 
         val builder = GsonBuilder()
         val gson = builder.create()

@@ -1,26 +1,27 @@
 package com.skvoznyak.findart
 
-import android.os.Bundle
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.ViewGroup
-import com.skvoznyak.findart.databinding.UploadScreenBinding
-import com.skvoznyak.findart.utils.*
-import java.util.*
-import com.yalantis.ucrop.UCrop
-import java.io.File
 import androidx.core.content.ContextCompat
+import com.skvoznyak.findart.databinding.UploadScreenBinding
+import com.skvoznyak.findart.utils.GetImage
+import com.skvoznyak.findart.utils.TfliteModel
+import com.skvoznyak.findart.utils.isOnline
+import com.skvoznyak.findart.utils.noConnection
+import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropActivity
-
+import java.io.File
 
 class UploadImageActivity : GetImage() {
 
     private lateinit var uploadImageBinding: UploadScreenBinding
-    private var bm : Bitmap? = null
+    private var bm: Bitmap? = null
     private val tfliteModel = TfliteModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,15 +52,9 @@ class UploadImageActivity : GetImage() {
         uploadImageBinding.buttonFind.setOnClickListener {
             if (isOnline(this)) {
                 findPicture()
-            }
-            else {
+            } else {
                 noConnection(applicationContext)
             }
-//            if (SharedPref.loadNightModeState()) {
-//                SharedPref.setNightModeState(false)
-//            } else {
-//                SharedPref.setNightModeState(true)
-//            }
         }
     }
 
@@ -67,10 +62,11 @@ class UploadImageActivity : GetImage() {
         if (bm == null || currentImageUri == null) {
             return
         }
-        val destinationUri = Uri.fromFile(File(cacheDir, "IMG_FindArt_" + System.currentTimeMillis()))
+        val destinationUri = Uri.fromFile(
+            File(cacheDir, "IMG_FindArt_" + System.currentTimeMillis())
+        )
         openCropActivity(currentImageUri!!, destinationUri, bm!!.height, bm!!.width)
     }
-
 
     fun openCropActivity(sourceUri: Uri, destinationUri: Uri, maxHeight: Int, maxWidth: Int) {
         try {
@@ -89,8 +85,12 @@ class UploadImageActivity : GetImage() {
         options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL)
         options.setToolbarColor(ContextCompat.getColor(this, R.color.ucrop_toolbar_color))
         options.setStatusBarColor(ContextCompat.getColor(this, R.color.ucrop_status_bar_color))
-        options.setToolbarWidgetColor(ContextCompat.getColor(this, R.color.ucrop_toolbar_text_color))
-        options.setRootViewBackgroundColor(ContextCompat.getColor(this, R.color.ucrop_background_color))
+        options.setToolbarWidgetColor(
+            ContextCompat.getColor(this, R.color.ucrop_toolbar_text_color)
+        )
+        options.setRootViewBackgroundColor(
+            ContextCompat.getColor(this, R.color.ucrop_background_color)
+        )
         options.setActiveControlsWidgetColor(ContextCompat.getColor(this, R.color.color_secondary))
         return uCrop.withOptions(options)
     }
@@ -122,14 +122,16 @@ class UploadImageActivity : GetImage() {
     private fun addContent() {
         uploadImageBinding = UploadScreenBinding.inflate(layoutInflater)
         addContentView(
-            uploadImageBinding.root, ViewGroup.LayoutParams(
+            uploadImageBinding.root,
+            ViewGroup.LayoutParams(
                 ViewGroup
-                    .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+                    .LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
             )
         )
     }
 
-    private fun processImage(requestCode : Int, currentPhotoPath : String?, data : Intent?) {
+    private fun processImage(requestCode: Int, currentPhotoPath: String?, data: Intent?) {
         when (requestCode) {
             activityResCodeSelectFile -> {
                 if (data != null) {
@@ -144,13 +146,13 @@ class UploadImageActivity : GetImage() {
         }
     }
 
-    override fun onCaptureImageResult() : Bitmap {
+    override fun onCaptureImageResult(): Bitmap {
         bm = super.onCaptureImageResult()
         uploadImageBinding.uploadedImage.setImageBitmap(bm)
         return bm as Bitmap
     }
 
-    override fun onSelectFromGalleryResult(data: Intent?) : Bitmap? {
+    override fun onSelectFromGalleryResult(data: Intent?): Bitmap? {
         bm = super.onSelectFromGalleryResult(data)
         if (bm != null) {
             uploadImageBinding.uploadedImage.setImageBitmap(bm)

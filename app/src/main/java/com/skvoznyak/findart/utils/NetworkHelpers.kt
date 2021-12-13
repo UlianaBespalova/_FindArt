@@ -1,15 +1,14 @@
 package com.skvoznyak.findart.utils
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.view.Gravity
 import android.widget.Toast
 import com.skvoznyak.findart.R
 
-
-fun isOnline(context: Context) : Boolean {
-    val cm : ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+fun isOnline(context: Context): Boolean {
+    val cm: ConnectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     if (cm.activeNetworkInfo == null) {
         return false
     }

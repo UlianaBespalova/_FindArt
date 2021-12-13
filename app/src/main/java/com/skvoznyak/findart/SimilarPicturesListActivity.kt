@@ -2,17 +2,16 @@ package com.skvoznyak.findart
 
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.fragment.app.FragmentTransaction
-import com.skvoznyak.findart.model.PictureRepository
 import com.skvoznyak.findart.model.Picture
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.skvoznyak.findart.model.PictureRepository
+import com.skvoznyak.findart.utils.isNightMode
 import com.skvoznyak.findart.utils.isOnline
 import com.skvoznyak.findart.utils.noConnection
-import com.skvoznyak.findart.utils.isNightMode
-
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 class SimilarPicturesListActivity : PicturesListActivity() {
 
@@ -27,22 +26,23 @@ class SimilarPicturesListActivity : PicturesListActivity() {
                 }
                 val similarRequestDisposable = PictureRepository.getSimilarPictures(vector)
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ images ->
-                        if (images.isNotEmpty()) {
-                            makePictureList(images)
+                    .subscribe(
+                        { images ->
+                            if (images.isNotEmpty()) {
+                                makePictureList(images)
+                            } else { noResults() }
+                        },
+                        { err ->
+                            Log.d("ivan", "request error: $err")
+                            noResults()
                         }
-                        else { noResults() }
-                    }, { err -> Log.d("ivan", "request error: $err")
-                        noResults()
-                    })
+                    )
                 disposables.add(similarRequestDisposable)
-            }
-            else {
+            } else {
                 noConnection(applicationContext)
                 finish()
             }
-        }
-        else {
+        } else {
             noResults()
         }
     }
@@ -50,21 +50,21 @@ class SimilarPicturesListActivity : PicturesListActivity() {
     private fun noResults() {
         hideLoader()
 
-        val resultList:RecyclerView = findViewById(R.id.resultList)
+        val resultList: RecyclerView = findViewById(R.id.resultList)
         val headerAdapter = HeaderAdapter(resources.getString(R.string.no_results))
         resultList.adapter = headerAdapter
         resultList.layoutManager = LinearLayoutManager(this)
         showNotFound()
     }
 
-    private fun makePictureList(images : List<Picture>) {
+    private fun makePictureList(images: List<Picture>) {
         Log.d("ivan", "Server: Success!")
         pictures = images
         setResultList(images)
     }
 
-    private fun setResultList(images : List<Picture>) {
-        val resultList:RecyclerView = findViewById(R.id.resultList)
+    private fun setResultList(images: List<Picture>) {
+        val resultList: RecyclerView = findViewById(R.id.resultList)
         resultList.isNestedScrollingEnabled = true
 
         val headerAdapter = HeaderAdapter(resources.getString(R.string.best_results))

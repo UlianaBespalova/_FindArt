@@ -2,14 +2,13 @@ package com.skvoznyak.findart
 
 import android.os.Bundle
 import android.view.MotionEvent
-import com.skvoznyak.findart.databinding.PictureScreenFullscreenImageBinding
 import com.github.chrisbanes.photoview.OnSingleFlingListener
+import com.skvoznyak.findart.databinding.PictureScreenFullscreenImageBinding
 import com.squareup.picasso.Picasso
 
 class FullScreenActivity : BaseActivity() {
 
     private lateinit var pictureBinding: PictureScreenFullscreenImageBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +20,7 @@ class FullScreenActivity : BaseActivity() {
         }
 
         val mPhotoView = pictureBinding.fullscreenImageView
-        mPhotoView.setOnSingleFlingListener(SingleFlingListener() {onBackPressed()})
+        mPhotoView.setOnSingleFlingListener(SingleFlingListener() { onBackPressed() })
     }
 
     private class SingleFlingListener(val callback: (() -> Unit)) : OnSingleFlingListener {

@@ -1,23 +1,22 @@
 package com.skvoznyak.findart
 
-import android.os.Bundle
 import android.content.Intent
 import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Build
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
-import com.skvoznyak.findart.databinding.PictureScreenBinding
 import com.google.gson.GsonBuilder
+import com.skvoznyak.findart.databinding.PictureScreenBinding
 import com.skvoznyak.findart.model.Picture
 import com.skvoznyak.findart.model.StorageManager
 import com.squareup.picasso.Picasso
 
-
 class PictureActivity : BaseActivity() {
 
     private lateinit var pictureBinding: PictureScreenBinding
-    private var varMenu : Menu? = null
+    private var varMenu: Menu? = null
     private var picture: Picture? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,11 +48,14 @@ class PictureActivity : BaseActivity() {
     }
 
     private fun openImage(image: String) {
-        var bundle : Bundle? = null
+        var bundle: Bundle? = null
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
             val v = pictureBinding.pictureImage
             val options = android.app.ActivityOptions.makeSceneTransitionAnimation(
-                this@PictureActivity, v, "open_image")
+                this@PictureActivity,
+                v,
+                "open_image"
+            )
             bundle = options.toBundle()
         }
         val intent = Intent(this@PictureActivity, FullScreenActivity::class.java)
@@ -71,9 +73,11 @@ class PictureActivity : BaseActivity() {
             pictureBinding.pictureText.justificationMode = JUSTIFICATION_MODE_INTER_WORD
         }
         addContentView(
-            pictureBinding.root, ViewGroup.LayoutParams(
+            pictureBinding.root,
+            ViewGroup.LayoutParams(
                 ViewGroup
-                    .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+                    .LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
             )
         )
     }
@@ -95,8 +99,11 @@ class PictureActivity : BaseActivity() {
         varMenu = menu
 
         fun setMenuItem(isAdded: Boolean) {
-            if (isAdded) { menu?.findItem(R.id.added_bookmark)?.isVisible = true }
-            else { menu?.findItem(R.id.add_bookmark)?.isVisible = true }
+            if (isAdded) {
+                menu?.findItem(R.id.added_bookmark)?.isVisible = true
+            } else {
+                menu?.findItem(R.id.add_bookmark)?.isVisible = true
+            }
         }
         if (picture != null) {
             StorageManager.contains(picture!!.title, ::setMenuItem)
@@ -106,7 +113,7 @@ class PictureActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        return when(item.itemId) {
+        return when (item.itemId) {
             android.R.id.home -> {
                 this.finish()
                 true

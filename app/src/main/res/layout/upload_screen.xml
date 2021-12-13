@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="15dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="15dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_topHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="75dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottomHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <ImageView
+        android:id="@+id/uploaded_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/uploaded_image"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toStartOf="@id/guideline3"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal"
+        app:layout_constraintTop_toTopOf="@id/guideline_topHorizontal"
+        tools:src="@drawable/picture_mock2" />
+
+    <Button
+        android:id="@+id/button_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/gill_sans"
+        android:text="@string/edit"
+        android:textColor="@color/color_on_primary"
+        android:textStyle="bold"
+        android:padding="0dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintEnd_toStartOf="@id/edit_chooseAnother_dot"
+        app:layout_constraintTop_toBottomOf="@id/uploaded_image" />
+
+    <TextView
+        android:id="@+id/edit_chooseAnother_dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-2dp"
+        android:fontFamily="@font/avenir_light"
+        android:text="@string/dot"
+        android:textColor="@color/color_on_primary"
+        android:textSize="50sp"
+        app:layout_constraintTop_toBottomOf="@id/uploaded_image"
+        app:layout_constraintStart_toEndOf="@id/button_edit"
+        app:layout_constraintEnd_toStartOf="@+id/button_chooseAnother" />
+
+    <Button
+        android:id="@+id/button_chooseAnother"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/gill_sans"
+        android:text="@string/choose_another"
+        android:textColor="@color/color_on_primary"
+        android:textStyle="bold"
+        android:padding="0dp"
+        app:layout_constraintStart_toEndOf="@id/edit_chooseAnother_dot"
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/uploaded_image" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_find"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_button"
+        android:text="@string/find"
+        android:textColor="@color/color_dialog"
+        android:textSize="20sp"
+        android:paddingVertical="20dp"
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintBottom_toTopOf="@id/guideline_bottomHorizontal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

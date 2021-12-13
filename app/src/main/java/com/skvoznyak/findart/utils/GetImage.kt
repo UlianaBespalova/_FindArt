@@ -163,12 +163,12 @@ open class GetImage : BaseActivity() {
                 .checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED
             ) {
-                if (ActivityCompat
+                val readPermission = ActivityCompat
                     .shouldShowRequestPermissionRationale(
                         context as Activity,
                         Manifest.permission.READ_EXTERNAL_STORAGE
                     )
-                ) {
+                if (readPermission) {
                     val alertBuilder = MaterialAlertDialogBuilder(context, R.style.DialogTheme)
                     alertBuilder.setCancelable(true)
                     alertBuilder.setTitle("Требуется разрешение")

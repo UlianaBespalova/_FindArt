@@ -12,11 +12,11 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 
 class TfliteModel {
 
-    fun imageToVector(bm_s: Bitmap, context: Context): FloatArray {
+    fun imageToVector(bmNew: Bitmap, context: Context): FloatArray {
 
         var res = emptyArray<Float>().toFloatArray()
         val bm = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            bm_s.copy(Bitmap.Config.RGBA_F16, true)
+            bmNew.copy(Bitmap.Config.RGBA_F16, true)
         } else {
             return res
         }
@@ -24,10 +24,10 @@ class TfliteModel {
         try {
             val model = ModelMeta.newInstance(context)
 
-            val bm_8888: Bitmap = bm.copy(Bitmap.Config.ARGB_8888, true)
-            val bm_sized_8888 = Bitmap.createScaledBitmap(bm_8888, 224, 224, true)
+            val bm8888: Bitmap = bm.copy(Bitmap.Config.ARGB_8888, true)
+            val bmSized8888 = Bitmap.createScaledBitmap(bm8888, 224, 224, true)
 
-            val byteBuffer = convertBitmapToByteBuffer(bm_sized_8888)
+            val byteBuffer = convertBitmapToByteBuffer(bmSized8888)
             val inputFeature0 = TensorBuffer.createFixedSize(
                 intArrayOf(1, 224, 224, 3),
                 DataType.FLOAT32
@@ -47,41 +47,28 @@ class TfliteModel {
     }
 
     private fun convertBitmapToByteBuffer(bm: Bitmap): ByteBuffer {
-        val INPUT_SIZE = 224
-        val PIXEL_SIZE = 3
+        val inputSize = 224
+        val pixelSize = 3
 
-        val IMAGE_MEAN = 127.5
-        val IMAGE_STD = 1
+        val imageMean = 127.5
+        val imageStd = 1
 
-        val imgData = ByteBuffer.allocateDirect(4 * INPUT_SIZE * INPUT_SIZE * PIXEL_SIZE)
+        val imgData = ByteBuffer.allocateDirect(4 * inputSize * inputSize * pixelSize)
         imgData.order(ByteOrder.nativeOrder())
-        val intValues = IntArray(INPUT_SIZE * INPUT_SIZE)
+        val intValues = IntArray(inputSize * inputSize)
 
         imgData.rewind()
         bm.getPixels(intValues, 0, bm.width, 0, 0, bm.width, bm.height)
 
         var pixel = 0
-        for (i in 0 until INPUT_SIZE) {
-            for (j in 0 until INPUT_SIZE) {
+        for (i in 0 until inputSize) {
+            for (j in 0 until inputSize) {
                 val value = intValues[pixel++]
-                imgData.putFloat((((value.shr(16) and 0xFF) / IMAGE_MEAN) - IMAGE_STD).toFloat())
-                imgData.putFloat((((value.shr(8) and 0xFF) / IMAGE_MEAN) - IMAGE_STD).toFloat())
+                imgData.putFloat((((value.shr(16) and 0xFF) / imageMean) - imageStd).toFloat())
+                imgData.putFloat((((value.shr(8) and 0xFF) / imageMean) - imageStd).toFloat())
                 imgData.putFloat((((value and 0xFF) / 127.5) - 1).toFloat())
             }
         }
         return imgData
-    }
-
-    fun PRINT_RESUTL(res: FloatArray) {
-        for (step in (0..3)) {
-            Log.d("ivan", "---------------$step--------------")
-
-            val vector = mutableListOf<Float>()
-            for (i in (256 * step..256 * (step + 1) - 1)) {
-                vector.add(res[i])
-            }
-            val str = vector.joinToString(separator = "|")
-            Log.d("ivan", str)
-        }
     }
 }

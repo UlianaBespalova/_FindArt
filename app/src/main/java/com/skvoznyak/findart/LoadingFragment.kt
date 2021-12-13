@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.skvoznyak.findart.databinding.LoadingScreenBinding
 
-class LoadingFragment() : Fragment() {
+class LoadingFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -192,12 +192,9 @@ open class GetImage : BaseActivity() {
                     )
                 }
                 return false
-            } else {
-                return true
             }
-        } else {
-            return true
         }
+        return true
     }
 
     fun showImageFromUri(context: Context, imageUri: Uri, view: ImageView) {

@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 
-object SharedPref {
+object NightModeHelper {
     private var mySharePref: SharedPreferences? = null
 
     fun setContext(context: Context) {
@@ -40,12 +40,11 @@ object SharedPref {
 
 fun isNightMode(uiMode: Int): Boolean {
     when (uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-        Configuration.UI_MODE_NIGHT_NO -> {
-            return false
-        }
         Configuration.UI_MODE_NIGHT_YES -> {
             return true
         }
+        else -> {
+            return false
+        }
     }
-    return false
 }

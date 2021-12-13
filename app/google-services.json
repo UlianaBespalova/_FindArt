@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "16223587492",
+    "project_id": "findart-8eb9c",
+    "storage_bucket": "findart-8eb9c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16223587492:android:ad8e4bb4e0259b339a6a31",
+        "android_client_info": {
+          "package_name": "com.skvoznyak.findart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16223587492-i634nlr8us70oqfs2acokkssvjnj14hm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4Cfk8KMjlLyIBtpXriLqOWxibRfPEuh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16223587492-i634nlr8us70oqfs2acokkssvjnj14hm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

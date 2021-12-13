@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_on_secondary">#FF000000</color>
+    <color name="color_dialog">#FFFFFFFF</color>
+    <color name="color_secondary">#FFA27E4A</color>
+    <color name="color_primary_variant">#FFFAD59E</color>
+    <color name="color_primary">#FFF3E4CD</color>
+    <color name="color_dialog_background">#F6EEE2</color>
+
+    <color name="color_secondary_dark">#FF77582C</color>
+    <color name="color_on_primary">#FF2C2A2B</color>
+    <color name="toolbar_gray">#FF49494A</color>
+
+    <color name="floating_button_color">#CDF1EAEA</color>
+    <color name="transparent_dark">#592C2A2B</color>
+
+    <color name="color_header_background">#FFF3E4CD</color>
+    <color name="divider_color">#B32C2A2B</color>
+    <color name="divider_secondary_color">#FFEBDCC5</color>
+
+    <color name="picture_background">#FF181819</color>
+    <color name="status_bar_color">#FF1E1E1E</color>
+
+    <color name="icon_tint_color">#000000</color>
+    <color name="ucrop_status_bar_color">#FFFAD59E</color>
+    <color name="ucrop_toolbar_color">#FFF3E4CD</color>
+    <color name="ucrop_toolbar_text_color">#000000</color>
+    <color name="ucrop_background_color">#363637</color>
+
+    <color name="ivan1">#E91E63</color>
+    <color name="ivan2">#673AB7</color>
+    <color name="ivan3">#2196F3</color>
+
+    <!--    TODO: Удалить, где они используются-->
+    <color name="purple_200">#592C2A2B</color>
+    <color name="purple_700">#592C2A2B</color>
+    <color name="teal_200">#FFECB8</color>
+</resources>

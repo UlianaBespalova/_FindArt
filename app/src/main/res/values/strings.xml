@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">FindArt</string>
+    <string name="back">Назад</string>
+    <string name="bookmarks">Закладки</string>
+
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="app_title_find">Find</string>
+    <string name="app_title_art">Art</string>
+    <string name="dot">·</string>
+
+    <string name="choose_image">Выбрать фото</string>
+    <string name="uploaded_image">Загруженное изображение</string>
+    <string name="choose_another">Выбрать другое</string>
+    <string name="edit">Редактировать</string>
+    <string name="find">Найти!</string>
+
+    <string name="best_results">Лучшее совпадение</string>
+    <string name="no_results">Совпадения не найдены</string>
+    <string name="no_bookmarks">Здесь пока нет закладок</string>
+</resources>

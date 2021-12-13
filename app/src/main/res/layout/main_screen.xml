@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottomHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="15dp" />
+
+    <ImageView
+        android:id="@+id/title_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="150dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_image"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/app_title_find"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir_light"
+        android:text="@string/app_title_find"
+        android:textSize="65sp"
+        app:layout_constraintBaseline_toTopOf="@id/guideline_horizontal1"
+        app:layout_constraintEnd_toStartOf="@id/app_title_dot" />
+
+    <TextView
+        android:id="@+id/app_title_dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir_light"
+        android:text="@string/dot"
+        android:textSize="70sp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBaseline_toTopOf="@id/guideline_horizontal1"
+        app:layout_constraintBottom_toBottomOf="@+id/app_title_find"
+        app:layout_constraintStart_toEndOf="@id/app_title_find"
+        app:layout_constraintTop_toTopOf="@+id/app_title_find" />
+
+    <TextView
+        android:id="@+id/app_title_art"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir_light"
+        android:text="@string/app_title_art"
+        android:textSize="65sp"
+        app:layout_constraintBottom_toBottomOf="@+id/app_title_dot"
+        app:layout_constraintStart_toEndOf="@id/app_title_dot"
+        app:layout_constraintTop_toTopOf="@+id/app_title_dot"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBaseline_toTopOf="@id/guideline_horizontal1" />
+
+    <TextView
+        android:id="@+id/button_choose_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gill_sans"
+        android:text="@string/choose_image"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBaseline_toTopOf="@id/guideline_bottomHorizontal" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_bookmarks"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="35dp"
+        android:clickable="true"
+        android:contentDescription="@string/bookmarks"
+        android:focusable="true"
+        app:srcCompat="@drawable/ic_bookmark_outline_black_24dp"
+        app:backgroundTint="@color/floating_button_color"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintTop_toTopOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

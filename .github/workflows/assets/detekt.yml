@@ -146,7 +146,7 @@ empty-blocks:
     active: true
   EmptyFunctionBlock:
     active: true
-    ignoreOverridden: false
+    ignoreOverridden: true
   EmptyIfBlock:
     active: true
   EmptyInitBlock:
@@ -206,7 +206,6 @@ exceptions:
     exceptionNames:
      - ArrayIndexOutOfBoundsException
      - Error
-     - Exception
      - IllegalMonitorStateException
      - NullPointerException
      - IndexOutOfBoundsException
@@ -549,7 +548,7 @@ style:
     active: true
     maxJumpCount: 1
   MagicNumber:
-    active: true
+    active: false
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     ignoreNumbers: ['-1', '0', '1', '2']
     ignoreHashCodeFunction: true

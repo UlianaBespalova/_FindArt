@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bookmarks_title"
+        android:title="@string/bookmarks"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/added_bookmark"
+        android:icon="@drawable/ic_close_black_24dp"
+        android:title="@string/bookmarks"
+        android:visible="false"
+        app:iconTint= "@color/icon_tint_color"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/add_bookmark"
+        android:icon="@drawable/icons8_plus_math_36"
+        android:title="@string/bookmarks"
+        android:visible="false"
+        app:iconTint= "@color/icon_tint_color"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_bookmarks"
+        android:icon="@drawable/ic_bookmark_outline_black_24dp"
+        android:title="@string/bookmarks"
+        app:iconTint= "@color/icon_tint_color"
+        app:showAsAction="always" />
+</menu>
+
+<!--TODO: Сделать закрашенную иконку-->
